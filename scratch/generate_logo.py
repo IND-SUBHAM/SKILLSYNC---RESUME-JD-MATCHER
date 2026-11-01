@@ -1,0 +1,152 @@
+# Script to generate precision SVG for SkillSync 'S' Dual-Arrow Constellation Logo
+import math
+
+def create_skillsync_svg():
+    # We will generate a standalone SVG with:
+    # 1. 180-degree rotational symmetry
+    # 2. Modern cyber-emerald / mint green gradients
+    # 3. Glowing neon filters
+    # 4. Constellation network graph inside both arrow bands
+    
+    svg = '''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="100%" height="100%" fill="none">
+  <defs>
+    <!-- Emerald to Mint Linear Gradients -->
+    <linearGradient id="ss-grad-top" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#047857" />
+      <stop offset="35%" stop-color="#059669" />
+      <stop offset="70%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#34d399" />
+    </linearGradient>
+
+    <linearGradient id="ss-grad-bot" x1="100%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#047857" />
+      <stop offset="35%" stop-color="#059669" />
+      <stop offset="70%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#34d399" />
+    </linearGradient>
+
+    <!-- Constellation Node Glow Gradients -->
+    <radialGradient id="node-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="40%" stop-color="#6ee7b7" />
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Drop Shadow / Glow Filter -->
+    <filter id="ss-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#10b981" flood-opacity="0.35" />
+      <feDropShadow dx="0" dy="1" stdDeviation="3" flood-color="#059669" flood-opacity="0.4" />
+    </filter>
+
+    <filter id="node-pulse" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <g filter="url(#ss-shadow)">
+    <!-- Top Arrow (Loop A) -->
+    <!--
+      Path description:
+      Top right arrowhead tip at (195, 52)
+      Outer top edge runs horizontally left, then curves around the left side,
+      then cuts down-right into the center and ends in an arrowhead pointing down-left (~235 deg).
+      Inner edge curves back up-right, parallel to outer arc, and joins the top-right arrowhead.
+    -->
+    <path class="arrow-shape" d="
+      M 195,52 
+      L 162,22 
+      L 162,39 
+      L 115,39 
+      C 72,39 48,68 48,105 
+      C 48,124 55,142 66,155
+      L 86,134
+      L 70,165
+      L 102,154
+      L 85,140
+      C 77,130 72,118 72,105
+      C 72,81 88,63 115,63
+      L 162,63
+      L 162,82
+      Z" 
+      fill="url(#ss-grad-top)" />
+
+    <!-- Bottom Arrow (Loop B: 180-deg rotated replica around (120, 120)) -->
+    <path class="arrow-shape" d="
+      M 45,188 
+      L 78,218 
+      L 78,201 
+      L 125,201 
+      C 168,201 192,172 192,135 
+      C 192,116 185,98 174,85
+      L 154,106
+      L 170,75
+      L 138,86
+      L 155,100
+      C 163,110 168,122 168,135
+      C 168,159 152,177 125,177
+      L 78,177
+      L 78,158
+      Z" 
+      fill="url(#ss-grad-bot)" />
+
+    <!-- Constellation Lines - Top Arrow -->
+    <g stroke="#a7f3d0" stroke-width="1.2" stroke-opacity="0.75" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="165" y1="51" x2="135" y2="51" />
+      <line x1="135" y1="51" x2="110" y2="48" />
+      <line x1="135" y1="51" x2="98" y2="56" />
+      <line x1="110" y1="48" x2="72" y2="70" />
+      <line x1="98" y1="56" x2="72" y2="70" />
+      <line x1="72" y1="70" x2="58" y2="95" />
+      <line x1="72" y1="70" x2="62" y2="120" />
+      <line x1="58" y1="95" x2="62" y2="120" />
+      <line x1="62" y1="120" x2="80" y2="148" />
+    </g>
+
+    <!-- Constellation Nodes - Top Arrow -->
+    <g fill="#ecfdf5">
+      <circle cx="165" cy="51" r="3" filter="url(#node-pulse)" />
+      <circle cx="135" cy="51" r="3.5" filter="url(#node-pulse)" />
+      <circle cx="110" cy="48" r="2.5" />
+      <circle cx="98" cy="56" r="2.2" />
+      <circle cx="72" cy="70" r="3.8" filter="url(#node-pulse)" />
+      <circle cx="58" cy="95" r="3" />
+      <circle cx="62" cy="120" r="3.2" filter="url(#node-pulse)" />
+      <circle cx="80" cy="148" r="2.5" />
+    </g>
+
+    <!-- Constellation Lines - Bottom Arrow (180 deg symmetry: x' = 240 - x, y' = 240 - y) -->
+    <g stroke="#a7f3d0" stroke-width="1.2" stroke-opacity="0.75" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="75" y1="189" x2="105" y2="189" />
+      <line x1="105" y1="189" x2="130" y2="192" />
+      <line x1="105" y1="189" x2="142" y2="184" />
+      <line x1="130" y1="192" x2="168" y2="170" />
+      <line x1="142" y1="184" x2="168" y2="170" />
+      <line x1="168" y1="170" x2="182" y2="145" />
+      <line x1="168" y1="170" x2="178" y2="120" />
+      <line x1="182" y1="145" x2="178" y2="120" />
+      <line x1="178" y1="120" x2="160" y2="92" />
+    </g>
+
+    <!-- Constellation Nodes - Bottom Arrow -->
+    <g fill="#ecfdf5">
+      <circle cx="75" cy="189" r="3" filter="url(#node-pulse)" />
+      <circle cx="105" cy="189" r="3.5" filter="url(#node-pulse)" />
+      <circle cx="130" cy="192" r="2.5" />
+      <circle cx="142" cy="184" r="2.2" />
+      <circle cx="168" cy="170" r="3.8" filter="url(#node-pulse)" />
+      <circle cx="182" cy="145" r="3" />
+      <circle cx="178" cy="120" r="3.2" filter="url(#node-pulse)" />
+      <circle cx="160" cy="92" r="2.5" />
+    </g>
+  </g>
+</svg>'''
+    return svg
+
+if __name__ == '__main__':
+    with open('static/skillsync-logo.svg', 'w', encoding='utf-8') as f:
+        f.write(create_skillsync_svg())
+    print("Logo SVG generated successfully.")

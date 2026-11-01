@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillSync | Resume & JD Matcher</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="skillsync-logo-green.png">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Glow Blobs -->
+    <div class="glow-blob glow-1"></div>
+    <div class="glow-blob glow-2"></div>
+    <div class="glow-blob glow-3"></div>
+
+    <header class="app-header">
+        <div class="container header-container">
+            <div class="logo-area">
+                <div class="logo-icon-wrapper">
+                    <img src="skillsync-logo-green.png" alt="SkillSync Logo" class="brand-logo-img">
+                </div>
+                <div class="logo-text">
+                    <h1>Skill<span>Sync</span></h1>
+                    <p>Resume & JD Matcher</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="backend-status-badge" id="backend-status-badge" title="Connecting to SkillSync Backend...">
+                    <span class="status-dot checking" id="backend-status-dot"></span>
+                    <span class="status-label" id="backend-status-label">Checking Backend...</span>
+                </div>
+                <div class="header-badge">
+                    <span class="pulse-indicator"></span>
+                    <span>Powered by NLP & TF-IDF</span>
+                </div>
+                <button class="btn-history-toggle" id="history-toggle-btn" title="View Match History">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>Match History</span>
+                    <span class="history-count-badge" id="history-count-badge">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container main-content">
+        <!-- Input Section -->
+        <section class="section-card input-section" id="input-section">
+            <div class="section-title">
+                <h2>Analyze Candidate Fit</h2>
+                <p>Upload files or choose samples to perform a deep semantic skill-gap and experience analysis.</p>
+            </div>
+
+            <div class="panels-grid">
+                <!-- Resume Panel -->
+                <div class="panel-card" id="resume-panel">
+                    <div class="panel-header">
+                        <div class="panel-icon resume"><i class="fa-solid fa-file-invoice"></i></div>
+                        <h3>1. Resume / CV</h3>
+                    </div>
+                    
+                    <!-- Drag & Drop Zone -->
+                    <div class="drop-zone" id="resume-drop-zone">
+                        <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                        <p class="drop-msg">Drag & drop your resume here</p>
+                        <p class="drop-submsg">Supports PDF or DOCX (Max 5MB)</p>
+                        <span class="or-divider">OR</span>
+                        <label for="resume-file-input" class="btn-secondary">Browse File</label>
+                        <input type="file" id="resume-file-input" accept=".pdf,.docx" hidden>
+                    </div>
+
+                    <!-- File Details (Hidden by default) -->
+                    <div class="file-details" id="resume-file-details">
+                        <div class="file-info">
+                            <i class="fa-solid fa-file-pdf file-icon" id="resume-icon-type"></i>
+                            <div class="file-text">
+                                <span class="file-name" id="resume-display-name">resume.pdf</span>
+                                <span class="file-size" id="resume-display-size">1.2 MB</span>
+                            </div>
+                        </div>
+                        <button class="remove-file-btn" id="remove-resume-btn" title="Remove file">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+
+
+                </div>
+
+                <!-- Job Description Panel -->
+                <div class="panel-card" id="jd-panel">
+                    <div class="panel-header">
+                        <div class="panel-icon jd"><i class="fa-solid fa-briefcase"></i></div>
+                        <h3>2. Job Description</h3>
+                    </div>
+
+                    <!-- Tabs/Toggle for JD Input -->
+                    <div class="jd-input-modes">
+                        <button class="mode-tab active" id="tab-jd-file">Upload File</button>
+                        <button class="mode-tab" id="tab-jd-text">Paste Text</button>
+                    </div>
+                    
+                    <!-- Mode 1: File Upload Drop Zone -->
+                    <div class="drop-zone" id="jd-drop-zone">
+                        <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                        <p class="drop-msg">Drag & drop job description here</p>
+                        <p class="drop-submsg">Supports PDF or DOCX (Max 5MB)</p>
+                        <span class="or-divider">OR</span>
+                        <label for="jd-file-input" class="btn-secondary">Browse File</label>
+                        <input type="file" id="jd-file-input" accept=".pdf,.docx" hidden>
+                    </div>
+
+                    <!-- Mode 2: Direct Text Area (Hidden by default) -->
+                    <div class="text-zone hidden" id="jd-text-zone">
+                        <textarea id="jd-text-input" placeholder="Paste the complete job description text details here..."></textarea>
+                    </div>
+
+                    <!-- File Details (Hidden by default) -->
+                    <div class="file-details" id="jd-file-details">
+                        <div class="file-info">
+                            <i class="fa-solid fa-file-pdf file-icon" id="jd-icon-type"></i>
+                            <div class="file-text">
+                                <span class="file-name" id="jd-display-name">jd.pdf</span>
+                                <span class="file-size" id="jd-display-size">450 KB</span>
+                            </div>
+                        </div>
+                        <button class="remove-file-btn" id="remove-jd-btn" title="Remove file">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <!-- Action Area -->
+            <div class="action-container">
+                <button class="btn-primary" id="analyze-btn">
+                    <span>Analyze & Match Profiles</span>
+                    <i class="fa-solid fa-wand-magic-sparkles animate-pulse"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Loading Overlay -->
+        <section class="loading-overlay hidden" id="loading-overlay">
+            <div class="spinner-container">
+                <div class="double-bounce1"></div>
+                <div class="double-bounce2"></div>
+            </div>
+            <h3 id="loading-status">Parsing documents...</h3>
+            <p id="loading-detail">Reading document contents and computing vectors</p>
+        </section>
+
+        <!-- Error Card -->
+        <div class="error-card hidden" id="error-card">
+            <div class="error-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
+            <div class="error-content">
+                <h4>Analysis Failed</h4>
+                <p id="error-message">Invalid resume format. Please try again.</p>
+            </div>
+            <button class="close-error-btn" id="close-error-btn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <!-- Results Section (Hidden initially) -->
+        <section class="results-container hidden" id="results-container">
+            
+            <div class="results-header">
+                <h2>Analysis Dashboard</h2>
+                <div class="results-actions">
+                    <button class="btn-secondary" id="results-history-btn">
+                        <i class="fa-solid fa-clock-rotate-left"></i> History (<span id="results-history-count">0</span>)
+                    </button>
+                    <button class="btn-secondary" id="print-report-btn">
+                        <i class="fa-solid fa-print"></i> Print Report
+                    </button>
+                    <button class="btn-secondary" id="reset-btn">
+                        <i class="fa-solid fa-arrow-rotate-left"></i> Match New Files
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dashboard Grid -->
+            <div class="dashboard-grid">
+                
+                <!-- Match Score circular progress card -->
+                <div class="dashboard-card score-card">
+                    <h3>Compatibility Score</h3>
+                    <div class="score-visualization">
+                        <svg class="progress-ring" width="200" height="200">
+                            <circle class="progress-ring__background" stroke="rgba(255,255,255,0.06)" stroke-width="14" fill="transparent" r="82" cx="100" cy="100"/>
+                            <circle class="progress-ring__circle" id="progress-circle" stroke="url(#score-gradient)" stroke-width="14" fill="transparent" r="82" cx="100" cy="100"/>
+                            <!-- Gradient for SVG stroke -->
+                            <defs>
+                                <linearGradient id="score-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#06b6d4" />
+                                    <stop offset="100%" stop-color="#8b5cf6" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="score-overlay">
+                            <span class="score-percent" id="score-text">0.0%</span>
+                            <span class="score-label" id="score-rating">Matching...</span>
+                        </div>
+                    </div>
+                    <div class="score-rating-desc" id="score-desc">
+                        Semantic match score calculated using Cosine Similarity based on TF-IDF vectors.
+                    </div>
+                </div>
+
+                <!-- Personal & Contact Details Card -->
+                <div class="dashboard-card contact-card">
+                    <h3>Candidate Profile</h3>
+                    <div class="profile-header">
+                        <div class="avatar-fallback" id="profile-avatar">U</div>
+                        <div class="profile-title">
+                            <h4 id="candidate-name">Biswagat M Bairagi</h4>
+                            <span class="badge" id="candidate-role-badge">Software Engineer</span>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-list">
+                        <div class="info-item">
+                            <span class="info-label"><i class="fa-regular fa-envelope"></i> Email</span>
+                            <span class="info-value clickable" id="candidate-email" title="Copy to clipboard">not.found@example.com</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label"><i class="fa-solid fa-mobile-screen-button"></i> Phone</span>
+                            <span class="info-value clickable" id="candidate-phone" title="Copy to clipboard">Not Found</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label"><i class="fa-solid fa-location-dot"></i> Location</span>
+                            <span class="info-value" id="candidate-location">Not Found</span>
+                        </div>
+                    </div>
+
+                    <div class="social-links-grid">
+                        <a href="#" target="_blank" class="social-badge linkedin" id="candidate-linkedin">
+                            <i class="fa-brands fa-linkedin-in"></i> LinkedIn
+                        </a>
+                        <a href="#" target="_blank" class="social-badge github" id="candidate-github">
+                            <i class="fa-brands fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Skills & Gap Analysis Card -->
+                <div class="dashboard-card skills-card span-two-cols">
+                    <h3>Skill Set Alignment</h3>
+                    
+                    <div class="skills-dashboard-grid">
+                        <!-- Match/Overlap -->
+                        <div class="skills-subset">
+                            <h4 class="skills-subset-title match"><i class="fa-solid fa-circle-check"></i> Matching Skills</h4>
+                            <div class="tags-container" id="matching-skills-tags">
+                                <span class="placeholder-text">No matching skills found</span>
+                            </div>
+                        </div>
+
+                        <!-- Missing/Gap -->
+                        <div class="skills-subset">
+                            <h4 class="skills-subset-title gap"><i class="fa-solid fa-circle-xmark"></i> Missing Skills (Gap)</h4>
+                            <div class="tags-container" id="missing-skills-tags">
+                                <span class="placeholder-text">No missing skills detected</span>
+                            </div>
+                        </div>
+
+                        <!-- Job Description Skills -->
+                        <div class="skills-subset full-width">
+                            <h4 class="skills-subset-title jd-all"><i class="fa-solid fa-list-check"></i> Required Skills in Job Description</h4>
+                            <div class="tags-container" id="jd-skills-tags">
+                                <span class="placeholder-text">No skills parsed from Job Description</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Candidate & Role Fit Summary -->
+                    <div class="skills-recommendations summary-card" id="skills-action-plan">
+                        <div class="recommendation-header">
+                            <i class="fa-solid fa-file-contract"></i>
+                            <h4 id="summary-card-title">Summary</h4>
+                        </div>
+                        <div class="summary-body" id="recommendation-text">
+                            <p>Upload a resume and job description to generate an in-depth profile match summary, key strengths, and tailored gap analysis.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience Alignment Card -->
+                <div class="dashboard-card experience-card">
+                    <h3>Experience Alignment</h3>
+                    <div class="experience-comparison">
+                        <div class="exp-block resume">
+                            <span class="exp-badge-title">Resume Exp</span>
+                            <div class="exp-value-list" id="resume-exp-list">
+                                <div class="exp-value-item">Fresher / Trainee</div>
+                            </div>
+                        </div>
+                        
+                        <div class="exp-arrow"><i class="fa-solid fa-right-left"></i></div>
+
+                        <div class="exp-block jd">
+                            <span class="exp-badge-title">JD Required</span>
+                            <div class="exp-value-list" id="jd-exp-list">
+                                <div class="exp-value-item">3 Years</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="additional-meta-grid">
+                        <div class="meta-card">
+                            <span class="meta-label">Internship Focus</span>
+                            <span class="meta-val" id="internship-status">
+                                <i class="fa-solid fa-circle-check text-success"></i> Yes
+                            </span>
+                        </div>
+                        <div class="meta-card">
+                            <span class="meta-label">Current Role Extracted</span>
+                            <span class="meta-val" id="current-role-val">Software Engineer</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education Details Card -->
+                <div class="dashboard-card education-card">
+                    <h3>Education Details</h3>
+                    <div class="education-details-list" id="education-details-list">
+                        <!-- Filled Dynamically -->
+                    </div>
+                </div>
+
+                <!-- Work & Employment History Card -->
+                <div class="dashboard-card work-history-card">
+                    <div class="card-header-with-badge">
+                        <h3><i class="fa-solid fa-briefcase"></i> Work & Employment History</h3>
+                        <span class="timeline-badge" id="work-history-badge">0 Records</span>
+                    </div>
+                    <div class="work-history-timeline" id="work-history-timeline">
+                        <!-- Filled Dynamically -->
+                    </div>
+                </div>
+
+                <!-- Terminal CLI execution output card -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <div class="container footer-container">
+            <p>&copy; 2026 SkillSync Matcher. All rights reserved.</p>
+            <p class="footer-meta">Client Session ID: 57befeb0-d718</p>
+        </div>
+    </footer>
+
+    <!-- Slide-Out Match History Drawer -->
+    <div class="drawer-backdrop hidden" id="drawer-backdrop"></div>
+    <aside class="history-drawer" id="history-drawer" aria-label="Match History Drawer">
+        <div class="drawer-header">
+            <div class="drawer-title-group">
+                <div class="drawer-title-icon">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                </div>
+                <div>
+                    <h3 class="drawer-heading">Match History</h3>
+                    <p class="drawer-subheading">Track and reload previous candidate evaluations</p>
+                </div>
+            </div>
+            <button class="btn-close-drawer" id="close-drawer-btn" title="Close drawer">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="drawer-toolbar">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="history-search-input" placeholder="Search candidate, role, or score...">
+            </div>
+            <button class="btn-clear-history" id="clear-history-btn" title="Clear all history">
+                <i class="fa-solid fa-trash-can"></i> Clear All
+            </button>
+        </div>
+
+        <div class="history-items-container" id="history-items-container">
+            <!-- Filled dynamically -->
+        </div>
+    </aside>
+
+    <script src="hex-background.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

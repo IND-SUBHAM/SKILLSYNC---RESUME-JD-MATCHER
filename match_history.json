@@ -1,0 +1,192 @@
+[
+  {
+    "id": "a9d0301c",
+    "timestamp": "Nov 01, 2026 \u2022 08:47 PM",
+    "iso_time": "2026-11-01T20:47:09.249107",
+    "candidate_name": "Biswagat M. Bairagi",
+    "role": "Candidate",
+    "score": 28.96,
+    "resume_file": "Biswagat_Professional_Resume.pdf",
+    "jd_title": "Python_Full_Stack_Developer_Job_Description.pdf",
+    "analysis": {
+      "success": true,
+      "match_score": 28.96,
+      "resume_skills": [
+        "artificial intelligence",
+        "css",
+        "data structures and algorithms",
+        "databases",
+        "git",
+        "github",
+        "html",
+        "javascript",
+        "machine learning",
+        "mysql",
+        "oracle sql",
+        "problem solving",
+        "python",
+        "sql",
+        "web development"
+      ],
+      "jd_skills": [
+        "api",
+        "aws",
+        "css",
+        "databases",
+        "django",
+        "docker",
+        "fastapi",
+        "flask",
+        "git",
+        "github",
+        "html",
+        "javascript",
+        "machine learning",
+        "mysql",
+        "postgresql",
+        "python",
+        "react"
+      ],
+      "missing_skills": [
+        "api",
+        "aws",
+        "django",
+        "docker",
+        "fastapi",
+        "flask",
+        "postgresql",
+        "react"
+      ],
+      "experience": {
+        "resume": [
+          "Project Experience"
+        ],
+        "jd": [
+          "3 Years"
+        ],
+        "internship": false,
+        "current_role": "Not Found"
+      },
+      "work_history": [
+        {
+          "role": "Project / Trainee Experience",
+          "company": "Independent / Academic Projects",
+          "duration": "Academic / Ongoing",
+          "description": "Self-driven Software Development and AI project experience involving Python, machine"
+        }
+      ],
+      "education": {
+        "degree": [
+          "b tech"
+        ],
+        "branch": [
+          "computer science engineering"
+        ],
+        "cgpa": [],
+        "percentage": [],
+        "school_levels": []
+      },
+      "personal_details": {
+        "name": "Biswagat M. Bairagi",
+        "email": "djsubham774@gmail.com",
+        "phone": "7327039125",
+        "linkedin": "linkedin.com/in/biswagat",
+        "github": "github.com/IND",
+        "location": "Not Found"
+      },
+      "terminal_output": ""
+    }
+  },
+  {
+    "id": "d9496593",
+    "timestamp": "Nov 01, 2026 \u2022 08:45 PM",
+    "iso_time": "2026-11-01T20:45:01.321702",
+    "candidate_name": "BISWAGAT M BAIRAGI",
+    "role": "software engineer",
+    "score": 23.07,
+    "resume_file": "resumes_BISWAGAT_M_BAIRAGI_Resume.pdf",
+    "jd_title": "jd_Software_Engineer_Trainee_JD.pdf",
+    "analysis": {
+      "success": true,
+      "match_score": 23.07,
+      "resume_skills": [
+        "api",
+        "artificial intelligence",
+        "css",
+        "django",
+        "git",
+        "github",
+        "html",
+        "java",
+        "javascript",
+        "machine learning",
+        "python",
+        "sql",
+        "web development"
+      ],
+      "jd_skills": [
+        "api",
+        "aws",
+        "css",
+        "databases",
+        "django",
+        "docker",
+        "fastapi",
+        "flask",
+        "git",
+        "github",
+        "html",
+        "javascript",
+        "machine learning",
+        "mysql",
+        "postgresql",
+        "python",
+        "react"
+      ],
+      "missing_skills": [
+        "aws",
+        "databases",
+        "docker",
+        "fastapi",
+        "flask",
+        "mysql",
+        "postgresql",
+        "react"
+      ],
+      "experience": {
+        "resume": [
+          "Fresher / Trainee"
+        ],
+        "jd": [
+          "3 Years"
+        ],
+        "internship": true,
+        "current_role": "software engineer"
+      },
+      "work_history": [],
+      "education": {
+        "degree": [
+          "b tech"
+        ],
+        "branch": [
+          "computer science engineering"
+        ],
+        "cgpa": [],
+        "percentage": [],
+        "school_levels": [
+          "10th",
+          "12th"
+        ]
+      },
+      "personal_details": {
+        "name": "BISWAGAT M BAIRAGI",
+        "email": "djsubham774@gmail.com",
+        "phone": "7327039125",
+        "linkedin": "linkedin.com/in/biswagat-m-bairagi-3687403b8",
+        "github": "github.com/IND-SUBHAM",
+        "location": "Bhubaneswar"
+      },
+      "terminal_output": ""
+    }
+  }
+]
